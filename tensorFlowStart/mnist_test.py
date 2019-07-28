@@ -129,7 +129,7 @@ if __name__ == '__main__':
     # loss = lr.train(iters_num=1000, epoch=100, learning_rate=0.5)
     # lr.show(loss)
     mlp = MLP([100])
-    loss = mlp.train(iters_num=10000, epoch=1000, learning_rate=0.001)
+    loss = mlp.train(iters_num=10000, epoch=1000, learning_rate=0.5)
     mlp.show(loss)
 
 
