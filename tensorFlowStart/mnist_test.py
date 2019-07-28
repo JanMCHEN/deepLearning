@@ -1,5 +1,6 @@
 import tensorflow as tf
 from tensorflow.examples.tutorials.mnist import input_data
+import tensorflow.contrib.layers as layers
 import os
 import matplotlib.pyplot as plt
 
@@ -8,7 +9,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 class Mnist:
-    def __init__(self, ws=None, bs=None):
+    def __init__(self):
         # 加载数据集
         self.mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
@@ -16,13 +17,9 @@ class Mnist:
         self.x = tf.placeholder(tf.float32, [None, 784], name='X')
         self.y = tf.placeholder(tf.float32, [None, 10], name='Y')
 
-        # 权重变量
-        self.w = ws
-        self.b = bs
-        if not ws:
-            self.w = tf.Variable(tf.zeros([784, 10]), name='W')
-        if not bs:
-            self.b = tf.Variable(tf.zeros([1, 10]), name='b')
+        # 测试精度
+        self.train_acc_list = []
+        self.test_acc_list = []
 
     def optimizer(self, fun, loss, learning_rate=0.01, **kwargs):
         """
@@ -38,32 +35,51 @@ class Mnist:
     def cross_entropy_loss(self, y_labal, y_predict):
         return tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_labal, logits=y_predict))
 
+    def test(self, sess, accuracy):
+        self.train_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.train.images,
+                                                                 self.y: self.mnist.train.labels}))
+        self.test_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.test.images,
+                                                                self.y: self.mnist.test.labels}))
+
     def accuracy(self, y_labal, y_predict):
         acc = tf.equal(tf.argmax(y_labal, 1), tf.argmax(y_predict, 1))
         return tf.reduce_mean(tf.cast(acc, tf.float32))
 
-    def predict(self, x, w, b):
+    def show(self, _loss):
+        plt.subplot(1, 2, 1)
+        plt.plot(list(_loss))
+        plt.subplot(1, 2, 2)
+        plt.plot(self.train_acc_list, '-b')
+        plt.plot(self.test_acc_list, '-r')
+        plt.legend(['train', 'test'])
+        plt.show()
+
+    def predict(self):
+        raise ImportError
+
+    def train(self):
         raise ImportError
 
 
 class LogisticRegression(Mnist):
     def __init__(self):
         super().__init__()
-        self.train_list = []
-        self.test_list = []
+        # 权重变量
+        self.w = tf.Variable(tf.zeros([784, 10]), name='W')
+        self.b = tf.Variable(tf.zeros([1, 10]), name='b')
 
-    def predict(self, x, w, b):
-        return tf.nn.softmax(tf.matmul(x, w) + b)
+    def predict(self):
+        return tf.matmul(self.x, self.w) + self.b
 
     def test(self, sess, accuracy):
-        self.train_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.train.images,
-                                                             self.y: self.mnist.train.labels}))
-        self.test_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.test.images,
-                                                            self.y: self.mnist.test.labels}))
+        self.train_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.train.images,
+                                                                 self.y: self.mnist.train.labels}))
+        self.test_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.test.images,
+                                                                self.y: self.mnist.test.labels}))
 
-    def train(self, iters_num=10000, learning_rate=0.01, batch_size=100, epoch=0):
+    def train(self, iters_num=10000, learning_rate=0.1, batch_size=100, epoch=0):
         print('...start')
-        y_pre = self.predict(self.x, self.w, self.b)
+        y_pre = self.predict()
         _loss = self.cross_entropy_loss(self.y, y_pre)
         optimizer = self.optimizer(tf.train.GradientDescentOptimizer, _loss, learning_rate=learning_rate)
         accuracy = self.accuracy(self.y, y_pre)
@@ -78,20 +94,43 @@ class LogisticRegression(Mnist):
                 print(i+1, ':loss=', loss_val)
                 yield loss_val
 
-    def show(self, _loss):
-        plt.subplot(1, 2, 1)
-        plt.plot(list(_loss))
-        plt.subplot(1, 2, 2)
-        plt.plot(self.train_list, '-b')
-        plt.plot(self.test_list, '-r')
-        plt.legend(['train', 'test'])
-        plt.show()
+
+class MLP(Mnist):
+    def __init__(self, hidden_size=[100]):
+        super().__init__()
+        self.hidden_size = hidden_size
+
+    def predict(self):
+        layers_weights = [self.x]
+        for i, units in enumerate(self.hidden_size):
+            layers_weights.append(layers.fully_connected(layers_weights[i], units, activation_fn=tf.nn.relu,
+                                                         scope='layer{}'.format(i+1)))
+        return layers.fully_connected(layers_weights[-1], 10, activation_fn=None, scope='out')
+
+    def train(self, iters_num=5000, learning_rate=0.1, batch_size=100, epoch=0):
+        y_pre = self.predict()
+        _loss = self.cross_entropy_loss(self.y, y_pre)
+        optimizer = self.optimizer(tf.train.AdadeltaOptimizer, _loss, learning_rate=learning_rate)
+        accuracy = self.accuracy(self.y, y_pre)
+        init = tf.global_variables_initializer()
+        with tf.Session() as sess:
+            sess.run(init)
+            for i in range(iters_num):
+                batch_xs, batch_ys = self.mnist.train.next_batch(batch_size)
+                _, loss_val = sess.run([optimizer, _loss], feed_dict={self.x: batch_xs, self.y: batch_ys})
+                if epoch and (i + 1) % epoch == 0:
+                    self.test(sess, accuracy)
+                print(i + 1, ':loss=', loss_val)
+                yield loss_val
 
 
 if __name__ == '__main__':
-    lr = LogisticRegression()
-    loss = lr.train(epoch=100)
-    lr.show(loss)
+    # lr = LogisticRegression()
+    # loss = lr.train(iters_num=1000, epoch=100, learning_rate=0.5)
+    # lr.show(loss)
+    mlp = MLP([100])
+    loss = mlp.train(iters_num=10000, epoch=1000, learning_rate=0.001)
+    mlp.show(loss)
 
 
 # # tensor board
