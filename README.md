@@ -8,3 +8,5 @@ layers.py为各层实现
 functions.py为常用数学函数
 
 deep_learn.py为深度学习具体实现
+
+#开始学习tensorflow
