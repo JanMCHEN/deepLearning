@@ -34,27 +34,30 @@
     <session id="831321428">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
+          <entry key="project.closed" value="2" />
+          <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.31" value="1" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.34" value="2" />
           <entry key="project.open.time.36" value="1" />
           <entry key="project.open.time.38" value="1" />
           <entry key="project.open.time.39" value="1" />
+          <entry key="project.open.time.41" value="1" />
           <entry key="project.open.time.5" value="2" />
           <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.65" value="1" />
-          <entry key="project.opened" value="11" />
+          <entry key="project.opened" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="Python Console" value="77" />
+          <entry key="Python Console" value="158" />
           <entry key="deep_learn" value="143" />
           <entry key="hanotower" value="63" />
-          <entry key="hello" value="17" />
+          <entry key="hello" value="20" />
           <entry key="md" value="168" />
-          <entry key="mnist_test" value="43" />
-          <entry key="py" value="9248" />
+          <entry key="mnist_test" value="72" />
+          <entry key="py" value="10636" />
           <entry key="txt" value="46" />
         </counts>
       </usages-collector>
@@ -62,7 +65,7 @@
         <counts>
           <entry key="Markdown" value="168" />
           <entry key="PLAIN_TEXT" value="46" />
-          <entry key="Python" value="9591" />
+          <entry key="Python" value="11092" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -70,7 +73,7 @@
           <entry key="gitignore" value="1" />
           <entry key="ipynb" value="1" />
           <entry key="md" value="2" />
-          <entry key="py" value="10" />
+          <entry key="py" value="11" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -78,7 +81,39 @@
           <entry key="IPNB" value="1" />
           <entry key="Markdown" value="2" />
           <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="10" />
+          <entry key="Python" value="11" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="319706228">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.25" value="1" />
+          <entry key="project.open.time.45" value="1" />
+          <entry key="project.opened" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="Python Console" value="60" />
+          <entry key="hello" value="12" />
+          <entry key="mnist_test" value="28" />
+          <entry key="py" value="2765" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="2865" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="py" value="8" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Python" value="8" />
         </counts>
       </usages-collector>
     </session>
@@ -88,8 +123,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/deep_learn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4">
-              <caret line="116" column="57" lean-forward="true" selection-start-line="116" selection-start-column="57" selection-end-line="116" selection-end-column="57" />
+            <state relative-caret-position="285">
+              <caret line="69" column="44" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="44" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
                 <marker date="1563271245445" expanded="true" signature="248:254" ph="..." />
@@ -102,11 +137,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/tensorFlowStart/hello.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
+            <state relative-caret-position="190">
+              <caret line="10" selection-start-line="10" selection-end-line="10" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -115,29 +150,40 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/README.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="SPLIT">
-              <first_editor relative-caret-position="266">
-                <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
-              </first_editor>
-              <second_editor />
+        <entry file="file://$PROJECT_DIR$/tensorFlowStart/mnist_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1178">
+              <caret line="247" column="31" lean-forward="true" selection-start-line="247" selection-start-column="31" selection-end-line="247" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+                <element signature="e#246#2332#0" />
+                <element signature="e#657#886#0" />
+                <element signature="e#1247#1346#0" />
+                <element signature="e#2365#2483#0" />
+                <element signature="e#2776#2793#0" />
+                <element signature="e#2596#2613#0" />
+                <element signature="e#2400#3728#0" />
+                <element signature="e#3778#5334#0" />
+                <element signature="e#3875#4160#0" />
+                <element signature="e#4872#5006#0" />
+                <marker date="1564486722125" expanded="false" signature="1075:1084" ph="..." />
+                <marker date="1564486722125" expanded="false" signature="1344:1405" ph="..." />
+                <marker date="1564486722125" expanded="true" signature="1874:2263" ph="..." />
+                <marker date="1564486722125" expanded="true" signature="5538:8802" ph="..." />
+                <marker date="1564486722125" expanded="true" signature="6641:6790" ph="..." />
+                <marker date="1564486722125" expanded="true" signature="6784:6790" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tensorFlowStart/mnist_test.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="124">
-              <caret line="89" column="65" selection-start-line="89" selection-start-column="65" selection-end-line="89" selection-end-column="65" />
+            <state relative-caret-position="342">
+              <caret line="18" column="92" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="92" />
               <folding>
-                <element signature="e#0#23#0" expanded="true" />
-                <marker date="1564334998962" expanded="true" signature="1520:1913" ph="..." />
-                <marker date="1564334998962" expanded="true" signature="2040:5220" ph="..." />
-                <marker date="1564334998962" expanded="true" signature="2335:2733" ph="..." />
-                <marker date="1564334998962" expanded="true" signature="3605:4945" ph="..." />
-                <marker date="1564334998962" expanded="true" signature="3714:3720" ph="..." />
+                <element signature="e#926#964#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,7 +192,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/layers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="77">
+            <state relative-caret-position="580">
               <caret line="79" column="43" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="43" />
               <folding>
                 <element signature="e#16#34#0" expanded="true" />
@@ -158,7 +204,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dataset/mnist.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="56">
+            <state relative-caret-position="1729">
               <caret line="95" column="38" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="38" />
             </state>
           </provider>
@@ -167,8 +213,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1292">
-              <caret line="49" column="79" lean-forward="true" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
+            <state relative-caret-position="19">
+              <caret line="49" column="79" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
               <folding>
                 <marker date="1562488723633" expanded="true" signature="44:45" ph="..." />
                 <marker date="1562488723633" expanded="true" signature="44:50" ph="..." />
@@ -182,7 +228,7 @@
         <entry file="file://$PROJECT_DIR$/test.ipynb">
           <provider selected="true" editor-type-id="ipnb-editor">
             <state>
-              <selected id="1" />
+              <selected id="0" />
             </state>
           </provider>
         </entry>
@@ -197,6 +243,12 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>Datasets</find>
+      <find>cast</find>
+    </findStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -207,11 +259,11 @@
         <option value="$PROJECT_DIR$/hanotower.py" />
         <option value="$PROJECT_DIR$/venv/my_kmp.py" />
         <option value="$PROJECT_DIR$/layers.py" />
-        <option value="$PROJECT_DIR$/tensorFlowStart/hello.py" />
-        <option value="$PROJECT_DIR$/test.ipynb" />
         <option value="$PROJECT_DIR$/deep_learn.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/test.ipynb" />
         <option value="$PROJECT_DIR$/tensorFlowStart/mnist_test.py" />
+        <option value="$PROJECT_DIR$/tensorFlowStart/hello.py" />
       </list>
     </option>
   </component>
@@ -235,6 +287,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -242,24 +295,26 @@
               <item name="deepL" type="b2602c69:ProjectViewProjectNode" />
               <item name="deepL" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="deepL" type="b2602c69:ProjectViewProjectNode" />
-              <item name="deepL" type="462c0819:PsiDirectoryNode" />
-              <item name="tensorFlowStart" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../LeetCode" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="deepL" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="deepL" />
+      </console-settings>
+    </option>
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -278,7 +333,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.deep_learn">
+  <component name="RunManager" selected="Python.hello">
     <configuration name="deepL" type="JupiterNotebook" factoryName="Jupyter Notebook">
       <module name="deepL" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -323,6 +378,9 @@
       <module name="deepL" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -421,18 +479,18 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Jupyter Notebook.deepL" />
       <item itemvalue="Python.deep_learn" />
       <item itemvalue="Python.my_kmp" />
       <item itemvalue="Python.hanotower" />
       <item itemvalue="Python.hello" />
       <item itemvalue="Python.mnist_test" />
-      <item itemvalue="Jupyter Notebook.deepL" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.deep_learn" />
-        <item itemvalue="Python.mnist_test" />
         <item itemvalue="Python.hello" />
+        <item itemvalue="Python.mnist_test" />
+        <item itemvalue="Python.deep_learn" />
         <item itemvalue="Python.hanotower" />
         <item itemvalue="Python.my_kmp" />
       </list>
@@ -493,7 +551,7 @@
     <frame x="-7" y="-7" width="1295" height="735" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16410671" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -507,12 +565,12 @@
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.5012126" side_tool="true" weight="0.29900333" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4987874" weight="0.29900333" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.4995958" visible="true" weight="0.36378738" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.4987874" weight="0.43355483" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.4995958" visible="true" weight="0.36378738" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" visible="true" weight="0.29021826" />
+      <window_info active="true" anchor="right" id="SciView" order="3" visible="true" weight="0.3241714" />
       <window_info anchor="right" x="0" y="0" width="273" height="535" id="Documentation" order="4" side_tool="true" weight="0.3031528" />
       <window_info anchor="right" id="Database" order="5" weight="0.32983023" />
     </layout>
@@ -531,13 +589,7 @@
     <option name="LAST_COMMIT_MESSAGE" value="全连接实现" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/numpy/core/multiarray.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/numpy/core/multiarray.py" />
     <entry file="file://$PROJECT_DIR$/../files/word_search.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
@@ -557,30 +609,58 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="779">
           <caret line="41" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <marker date="1564040443164" expanded="true" signature="10:15" ph="..." />
-          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://D:/Anaconda3.7/envs/tensorflow/Lib/site-packages/tensorflow/python/pywrap_tensorflow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="75" column="80" lean-forward="true" selection-start-line="75" selection-start-column="80" selection-end-line="75" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/python/platform/self_check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="10" column="74" lean-forward="true" selection-start-line="10" selection-start-column="74" selection-end-line="10" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dataset/mnist.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1729">
+          <caret line="95" column="38" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test.ipynb">
       <provider selected="true" editor-type-id="ipnb-editor">
         <state>
-          <selected id="3" />
+          <selected id="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dataset/mnist.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/python/framework/dtypes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="95" column="38" selection-start-line="95" selection-start-column="31" selection-end-line="95" selection-end-column="38" />
+        <state relative-caret-position="-5775">
+          <caret line="20" column="30" lean-forward="true" selection-start-line="20" selection-start-column="30" selection-end-line="20" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/layers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="580">
+          <caret line="79" column="43" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="43" />
+          <folding>
+            <element signature="e#16#34#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1292">
-          <caret line="49" column="79" lean-forward="true" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
+        <state relative-caret-position="19">
+          <caret line="49" column="79" selection-start-line="49" selection-start-column="79" selection-end-line="49" selection-end-column="79" />
           <folding>
             <marker date="1562488723633" expanded="true" signature="44:45" ph="..." />
             <marker date="1562488723633" expanded="true" signature="44:50" ph="..." />
@@ -589,37 +669,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tensorFlowStart/hello.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/python/ops/gen_nn_ops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="9" column="41" lean-forward="true" selection-start-line="9" selection-start-column="41" selection-end-line="9" selection-end-column="41" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="168">
+          <caret line="11463" column="37" lean-forward="true" selection-start-line="11463" selection-start-column="37" selection-end-line="11463" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/layers.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/python/ops/nn_ops.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="77">
-          <caret line="79" column="43" selection-start-line="79" selection-start-column="24" selection-end-line="79" selection-end-column="43" />
-          <folding>
-            <element signature="e#16#34#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="73">
+          <caret line="2929" column="44" selection-start-line="2929" selection-start-column="37" selection-end-line="2929" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deep_learn.py">
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/contrib/learn/python/learn/datasets/mnist.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4">
-          <caret line="116" column="57" lean-forward="true" selection-start-line="116" selection-start-column="57" selection-end-line="116" selection-end-column="57" />
+        <state relative-caret-position="157">
+          <caret line="293" column="22" selection-start-line="293" selection-start-column="14" selection-end-line="293" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/contrib/learn/python/learn/datasets/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="18" column="92" selection-start-line="18" selection-start-column="26" selection-end-line="18" selection-end-column="92" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <marker date="1563271245445" expanded="true" signature="248:254" ph="..." />
-            <marker date="1563271245445" expanded="true" signature="571:572" ph="..." />
-            <marker date="1563271245445" expanded="true" signature="571:576" ph="..." />
-            <marker date="1563271245445" expanded="true" signature="3159:3318" ph="..." />
-            <marker date="1563271245445" expanded="true" signature="3426:3435" ph="..." />
+            <element signature="e#926#964#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -634,17 +710,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/Lib/site-packages/tensorflow/python/framework/ops.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="2004" selection-start-line="2004" selection-end-line="2004" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deep_learn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="69" column="44" selection-start-line="69" selection-start-column="26" selection-end-line="69" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <marker date="1563271245445" expanded="true" signature="248:254" ph="..." />
+            <marker date="1563271245445" expanded="true" signature="571:572" ph="..." />
+            <marker date="1563271245445" expanded="true" signature="571:576" ph="..." />
+            <marker date="1563271245445" expanded="true" signature="3159:3318" ph="..." />
+            <marker date="1563271245445" expanded="true" signature="3426:3435" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tensorFlowStart/mnist_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="89" column="65" selection-start-line="89" selection-start-column="65" selection-end-line="89" selection-end-column="65" />
+        <state relative-caret-position="1178">
+          <caret line="247" column="31" lean-forward="true" selection-start-line="247" selection-start-column="31" selection-end-line="247" selection-end-column="31" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-            <marker date="1564334998962" expanded="true" signature="1520:1913" ph="..." />
-            <marker date="1564334998962" expanded="true" signature="2040:5220" ph="..." />
-            <marker date="1564334998962" expanded="true" signature="2335:2733" ph="..." />
-            <marker date="1564334998962" expanded="true" signature="3605:4945" ph="..." />
-            <marker date="1564334998962" expanded="true" signature="3714:3720" ph="..." />
+            <element signature="e#246#2332#0" />
+            <element signature="e#657#886#0" />
+            <element signature="e#1247#1346#0" />
+            <element signature="e#2365#2483#0" />
+            <element signature="e#2776#2793#0" />
+            <element signature="e#2596#2613#0" />
+            <element signature="e#2400#3728#0" />
+            <element signature="e#3778#5334#0" />
+            <element signature="e#3875#4160#0" />
+            <element signature="e#4872#5006#0" />
+            <marker date="1564486722125" expanded="false" signature="1075:1084" ph="..." />
+            <marker date="1564486722125" expanded="false" signature="1344:1405" ph="..." />
+            <marker date="1564486722125" expanded="true" signature="1874:2263" ph="..." />
+            <marker date="1564486722125" expanded="true" signature="5538:8802" ph="..." />
+            <marker date="1564486722125" expanded="true" signature="6641:6790" ph="..." />
+            <marker date="1564486722125" expanded="true" signature="6784:6790" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tensorFlowStart/hello.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

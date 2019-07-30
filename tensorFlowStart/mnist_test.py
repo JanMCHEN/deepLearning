@@ -9,7 +9,10 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 
 class Mnist:
-    def __init__(self):
+    """
+    mnist基类
+    """
+    def __init__(self, learning_rate=1e-4):
         # 加载数据集
         self.mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
@@ -20,8 +23,9 @@ class Mnist:
         # 测试精度
         self.train_acc_list = []
         self.test_acc_list = []
+        self.loss_list = []
 
-    def optimizer(self, fun, loss, learning_rate=0.01, **kwargs):
+    def optimizer(self, fun, learning_rate=0.01, **kwargs):
         """
         优化器
         :param fun: 优化函数
@@ -30,24 +34,36 @@ class Mnist:
         :param kwargs:
         :return:
         """
-        return fun(learning_rate=learning_rate, *kwargs).minimize(loss=loss)
+        return fun(learning_rate=learning_rate, *kwargs).minimize(loss=self._loss)
 
-    def cross_entropy_loss(self, y_labal, y_predict):
-        return tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y_labal, logits=y_predict))
+    def cross_entropy_loss(self):
+        # return -tf.reduce_mean(self.y * tf.log(tf.nn.softmax(self.y_pre)))
 
-    def test(self, sess, accuracy):
-        self.train_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.train.images,
-                                                                 self.y: self.mnist.train.labels}))
-        self.test_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.test.images,
-                                                                self.y: self.mnist.test.labels}))
+        return tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=self.y, logits=self.y_pre))
 
-    def accuracy(self, y_labal, y_predict):
-        acc = tf.equal(tf.argmax(y_labal, 1), tf.argmax(y_predict, 1))
+    def _test(self, sess, x_, y_, dropout=0.):
+        feed_dict = {self.x: x_, self.y: y_}
+        if dropout:
+            feed_dict[self.keep_prob] = dropout
+        return sess.run(self.acc, feed_dict=feed_dict)
+
+    def test_acc(self, sess, batch_size: int = 100, dropout=0.):
+        tt_batch_num = self.mnist.test.labels.shape[0] // batch_size
+        test_acc = 0
+
+        for i in range(tt_batch_num):
+            test_acc += self._test(sess, self.mnist.test.images[i*batch_size: (i+1)*batch_size],
+                                   self.mnist.test.labels[i*batch_size: (i+1)*batch_size], dropout)
+
+        self.test_acc_list.append(test_acc/tt_batch_num)
+
+    def accuracy(self):
+        acc = tf.equal(tf.argmax(self.y, 1), tf.argmax(self.y_pre, 1))
         return tf.reduce_mean(tf.cast(acc, tf.float32))
 
-    def show(self, _loss):
+    def show(self):
         plt.subplot(1, 2, 1)
-        plt.plot(list(_loss))
+        plt.plot(self.loss_list)
         plt.subplot(1, 2, 2)
         plt.plot(self.train_acc_list, '-b')
         plt.plot(self.test_acc_list, '-r')
@@ -62,43 +78,58 @@ class Mnist:
 
 
 class LogisticRegression(Mnist):
-    def __init__(self):
+    """
+    逻辑回归
+    """
+    def __init__(self, learning_rate=1e-4):
         super().__init__()
         # 权重变量
-        self.w = tf.Variable(tf.zeros([784, 10]), name='W')
-        self.b = tf.Variable(tf.zeros([1, 10]), name='b')
+        self.w = tf.Variable(tf.truncated_normal([784, 10]), name='W')
+        self.b = tf.Variable(tf.constant(0.1, shape=[1, 10]), name='b')
+
+        # init
+        self.y_pre = self.predict()
+        self._loss = self.cross_entropy_loss()
+        self.train_step = self.optimizer(tf.train.AdamOptimizer, learning_rate=learning_rate)
+        self.acc = self.accuracy()
 
     def predict(self):
         return tf.matmul(self.x, self.w) + self.b
 
-    def test(self, sess, accuracy):
-        self.train_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.train.images,
-                                                                 self.y: self.mnist.train.labels}))
-        self.test_acc_list.append(sess.run(accuracy, feed_dict={self.x: self.mnist.test.images,
-                                                                self.y: self.mnist.test.labels}))
-
-    def train(self, iters_num=10000, learning_rate=0.1, batch_size=100, epoch=0):
-        print('...start')
-        y_pre = self.predict()
-        _loss = self.cross_entropy_loss(self.y, y_pre)
-        optimizer = self.optimizer(tf.train.GradientDescentOptimizer, _loss, learning_rate=learning_rate)
-        accuracy = self.accuracy(self.y, y_pre)
-        init = tf.global_variables_initializer()
+    def train(self, iters_num: int = 10000, batch_size=100, epoch: int = 0) -> float:
         with tf.Session() as sess:
-            sess.run(init)
+            sess.run(tf.global_variables_initializer())
             for i in range(iters_num):
                 batch_xs, batch_ys = self.mnist.train.next_batch(batch_size)
-                _, loss_val = sess.run([optimizer, _loss], feed_dict={self.x: batch_xs, self.y: batch_ys})
+                loss_val,  _ = sess.run([self._loss, self.train_step], feed_dict={self.x: batch_xs, self.y: batch_ys})
+                print(i + 1, ':loss=', loss_val, end='  ')
                 if epoch and (i + 1) % epoch == 0:
-                    self.test(sess, accuracy)
-                print(i+1, ':loss=', loss_val)
-                yield loss_val
+                    acc = self._test(sess, batch_xs, batch_ys)
+                    self.train_acc_list.append(acc)
+                    self.test_acc(sess)
+                    print('accuracy=', acc, end='')
+                print()
+                self.loss_list.append(loss_val)
 
 
 class MLP(Mnist):
-    def __init__(self, hidden_size=[100]):
+    """
+    全连接层
+    """
+    def __init__(self, hidden_size=(100,), learning_rate=1e-4):
+        """
+        可以构建多个全连接层
+        :param hidden_size: 每层节点元组
+        :param learning_rate:
+        """
         super().__init__()
         self.hidden_size = hidden_size
+
+        # init
+        self.y_pre = self.predict()
+        self._loss = self.cross_entropy_loss()
+        self.train_step = self.optimizer(tf.train.AdamOptimizer, learning_rate=learning_rate)
+        self.acc = self.accuracy()
 
     def predict(self):
         layers_weights = [self.x]
@@ -107,82 +138,114 @@ class MLP(Mnist):
                                                          scope='layer{}'.format(i+1)))
         return layers.fully_connected(layers_weights[-1], 10, activation_fn=None, scope='out')
 
-    def train(self, iters_num=5000, learning_rate=0.1, batch_size=100, epoch=0):
-        y_pre = self.predict()
-        _loss = self.cross_entropy_loss(self.y, y_pre)
-        optimizer = self.optimizer(tf.train.AdadeltaOptimizer, _loss, learning_rate=learning_rate)
-        accuracy = self.accuracy(self.y, y_pre)
-        init = tf.global_variables_initializer()
+    def train(self, iters_num: int = 10000, batch_size=100, epoch: int = 0) -> float:
         with tf.Session() as sess:
-            sess.run(init)
+            sess.run(tf.global_variables_initializer())
             for i in range(iters_num):
                 batch_xs, batch_ys = self.mnist.train.next_batch(batch_size)
-                _, loss_val = sess.run([optimizer, _loss], feed_dict={self.x: batch_xs, self.y: batch_ys})
+                loss_val,  _ = sess.run([self._loss, self.train_step], feed_dict={self.x: batch_xs, self.y: batch_ys})
+                print(i + 1, ':loss=', loss_val, end='  ')
                 if epoch and (i + 1) % epoch == 0:
-                    self.test(sess, accuracy)
-                print(i + 1, ':loss=', loss_val)
-                yield loss_val
+                    acc = self._test(sess, batch_xs, batch_ys)
+                    self.train_acc_list.append(acc)
+                    self.test_acc(sess)
+                    print('accuracy=', acc, end='')
+                print()
+                self.loss_list.append(loss_val)
+
+
+class ConvNet(Mnist):
+    """
+    卷积神经网络
+    两卷积+池化+两全连接+dropout
+    """
+    def __init__(self, learning_rate=1e-4):
+        super().__init__()
+        self.keep_prob = tf.placeholder(tf.float32)
+        self.weights = {
+            # 5*5 conv, 1 inputs and 32 outputs
+            'wc1': tf.Variable(tf.truncated_normal([5, 5, 1, 32], stddev=0.1)),
+            # 5*5 conv, 32 inputs and 64 outputs
+            'wc2': tf.Variable(tf.truncated_normal([5, 5, 32, 64], stddev=0.1)),
+            'wd1': tf.Variable(tf.truncated_normal([7*7*64, 1024], stddev=0.1)),
+            'out': tf.Variable(tf.truncated_normal([1024, 10], stddev=0.1))
+        }
+        self.biases = {
+            'bc1': tf.Variable(tf.random_normal([32])),
+            'bc2': tf.Variable(tf.random_normal([64])),
+            'bd1': tf.Variable(tf.random_normal([1024])),
+            'out': tf.Variable(tf.random_normal([10]))
+        }
+
+        # init
+        self.y_pre = self.predict()
+        self._loss = self.cross_entropy_loss()
+        self.train_step = self.optimizer(tf.train.AdamOptimizer, learning_rate=learning_rate)
+        self.acc = self.accuracy()
+
+    def conv2d(self, x, w, b, strides=1):
+        x = tf.nn.conv2d(x, w, strides=[1, strides, strides, 1], padding='SAME')
+        x = tf.nn.bias_add(x, b)
+        return tf.nn.relu(x)
+
+    def predict(self):
+        # 将数据转换成28*28个像素点的图像
+        x = tf.reshape(self.x, shape=[-1, 28, 28, 1])
+
+        # First convolution layer
+        conv1 = self.conv2d(x, self.weights['wc1'], self.biases['bc1'])
+        # Max pooling
+        conv1 = tf.nn.max_pool(conv1, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+
+        # Second convolution layer
+        conv2 = self.conv2d(conv1, self.weights['wc2'], self.biases['bc2'])
+        conv2 = tf.nn.max_pool(conv2, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
+
+        # reshape成与全连接层输入相关, 最后有64个输出，28 * 28 * 64，两个池化层减小为1/16， 故为 7 * 7 * 64
+        fc1 = tf.reshape(conv2, shape=[-1, 7 * 7 * 64])
+
+        # fc1 = tf.add(tf.matmul(fc1, self.weights['wd1']), self.biases['bd1'])
+        # fc1 = tf.nn.relu(fc1)
+
+        fc1 = layers.fully_connected(fc1, 1024, activation_fn=tf.nn.relu)
+
+        # dropout
+        fc1 = tf.nn.dropout(fc1, self.keep_prob)
+
+        # return tf.add(tf.matmul(fc1, self.weights['out']), self.biases['out'])
+
+        return layers.fully_connected(fc1, 10, activation_fn=None, scope='out')
+
+    def train(self, iters_num: int = 5000, batch_size=100, epoch: int = 0) -> float:
+        with tf.Session() as sess:
+            sess.run(tf.global_variables_initializer())
+            for i in range(iters_num):
+                batch_xs, batch_ys = self.mnist.train.next_batch(batch_size)
+                loss_val,  _ = sess.run([self._loss, self.train_step], feed_dict={self.x: batch_xs, self.y: batch_ys,
+                                                                                  self.keep_prob: 0.8})
+                print(i + 1, ':loss=', loss_val, end='  ')
+                if epoch and (i + 1) % epoch == 0:
+                    acc = self._test(sess, batch_xs, batch_ys, 1.)
+                    self.train_acc_list.append(acc)
+                    self.test_acc(sess, dropout=1.)
+                    print('accuracy=', acc, end='')
+                print()
+                self.loss_list.append(loss_val)
 
 
 if __name__ == '__main__':
+    print('start....-----------.......')
+
     # lr = LogisticRegression()
-    # loss = lr.train(iters_num=1000, epoch=100, learning_rate=0.5)
-    # lr.show(loss)
-    mlp = MLP([100])
-    loss = mlp.train(iters_num=10000, epoch=1000, learning_rate=0.5)
-    mlp.show(loss)
+    # lr.train(iters_num=10000, epoch=100)
+    # lr.show()
 
+    # mlp = MLP()
+    # mlp.train(iters_num=10000, epoch=1000)
+    # mlp.show()
 
-# # tensor board
-# # 加载数据集
-# mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
-#
-# # 占位符
-# x = tf.placeholder(tf.float32, [None, 784], name='X')
-# y = tf.placeholder(tf.float32, [None, 10], name='Y')
-#
-# # 权重变量
-# w = tf.Variable(tf.zeros([784, 10]), name='W')
-# b = tf.Variable(tf.zeros([1, 10]), name='b')
-#
-# # 逻辑回归
-# with tf.name_scope('wx_b') as scope:
-#     y_hat = tf.nn.softmax(tf.matmul(x, w) + b)
-#     # 收集w和b变化关系
-#     w_h = tf.summary.histogram('weights', w)
-#     b_h = tf.summary.histogram('biases', b)
-#
-# # 交叉熵和损失函数
-# with tf.name_scope('cross-entropy') as scope:
-#     loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=y, logits=y_hat))
-#     tf.summary.scalar('cross-entropy', loss)
-#
-# # 梯度下降优化器
-# with tf.name_scope('train') as scope:
-#     optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.01).minimize(loss=loss)
-#
-# # 变量初始化
-# init = tf.global_variables_initializer()
-#
-# # 组合所有summary操作
-# merged_summary_op = tf.summary.merge_all()
-#
-# # 存储summary
-# with tf.Session() as sess:
-#     sess.run(init)
-#     summary_writer = tf.summary.FileWriter('graphs', sess.graph)
-#
-#     # 开始训练
-#     for epoch in range(100):
-#         loss_avg = 0
-#         num_of_batch = int(mnist.train.num_examples/100)
-#         for i in range(num_of_batch):
-#             batch_xs, batch_ys = mnist.train.next_batch(100)
-#             _, l, summary_str = sess.run([optimizer, loss, merged_summary_op], feed_dict={x: batch_xs, y: batch_ys})
-#             loss_avg += l
-#             summary_writer.add_summary(summary_str, epoch*num_of_batch + i)
-#         loss_avg = loss_avg/num_of_batch
-#         print('Epoch{}: Loss{}'.format(epoch, loss_avg))
-#     print('Done')
-#     # print(sess.run(accuracy, feed_dict={x: mnist.test.images, y: mnist.test.labels}))
+    conv = ConvNet()
+    conv.train(1000, epoch=100)
+    conv.show()
+
 
