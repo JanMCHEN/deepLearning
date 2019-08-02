@@ -6,5 +6,5 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 if __name__ == '__main__':
     message = tf.constant("hello world")
-    with tf.Session() as sess:
+    with tf.compat.v1.Session() as sess:
         print(sess.run(message).decode())

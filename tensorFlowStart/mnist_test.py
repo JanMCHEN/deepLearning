@@ -12,7 +12,7 @@ class Mnist:
     """
     mnist基类
     """
-    def __init__(self, learning_rate=1e-4):
+    def __init__(self):
         # 加载数据集
         self.mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 
