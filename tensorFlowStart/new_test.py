@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow.keras import layers
 from tensorflow.examples.tutorials.mnist import input_data
+import numpy as np
 
 mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 x_train = mnist.train.images
@@ -26,6 +27,9 @@ class MLP:
         # this requires a model with the same architecture.
         # self.model.load_weights('./weights/mlp_model')
 
+        # Restore the model's state
+        model.load_weights('my_model.h5')
+
     def train(self, dataset=None):
         if not dataset:
             dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train)).batch(32).repeat()
@@ -36,10 +40,13 @@ class MLP:
         # Save weights to a TensorFlow Checkpoint file
         # self.model.save_weights('./weights/mlp_model')
 
+        # Save weights to a HDF5 file
+        self.model.save_weights('./weights/klp_model.h5', save_format='h5')
+
     def predict(self, data=None):
         if not data:
             data = x_test
-        return self.model.predict(data, batch_size=32)
+        return np.argmax(self.model.predict(data, batch_size=32), 1)
 
     def evaluate(self, dataset=None):
         if not dataset:
@@ -50,4 +57,4 @@ class MLP:
 
 if __name__ == '__main__':
     model = MLP()
-    model.train()
+    # model.train()
